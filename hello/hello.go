@@ -6,21 +6,31 @@ func main() {
 	fmt.Printf(hello("", ""))
 }
 
-const hellopre = "hello, "
+const (
+	english_pre = "hello, "
+	spanish_pre = "hola, "
+	franch_pre  = "oui, "
 
-func hello(s string, lang string) string {
-	if s == "" {
-		s = "world"
+	franch  = "franch"
+	spanish = "spanish"
+)
+
+func hello(name string, lang string) string {
+	if name == "" {
+		name = "world"
 	}
 
-	pre := hellopre
+	return prefix(lang) + name
+}
+
+func prefix(lang string) string {
+	pre := english_pre
 
 	switch lang {
-	case "spanish":
-		pre = "hola, "
-	case "franch":
-		pre = "oui, "
+	case spanish:
+		pre = spanish_pre
+	case franch:
+		pre = franch_pre
 	}
-
-	return pre + s
+	return pre
 }
