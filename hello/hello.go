@@ -23,14 +23,14 @@ func hello(name string, lang string) string {
 	return prefix(lang) + name
 }
 
-func prefix(lang string) string {
-	pre := english_pre
-
+func prefix(lang string) (pre string) {
 	switch lang {
 	case spanish:
 		pre = spanish_pre
 	case franch:
 		pre = franch_pre
+	default:
+		pre = english_pre
 	}
-	return pre
+	return
 }
