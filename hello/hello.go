@@ -6,6 +6,8 @@ func main() {
 	fmt.Printf(hello(""))
 }
 
+const hellopre = "hello, "
+
 func hello(s string) string {
-	return "hello, " + s
+	return hellopre + s
 }
