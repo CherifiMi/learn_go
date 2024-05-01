@@ -15,5 +15,8 @@ func hello(s string, lang string) string {
 	if lang == "spanish" {
 		return "hola, " + s
 	}
+	if lang == "franch" {
+		return "oui, " + s
+	}
 	return hellopre + s
 }
