@@ -12,11 +12,15 @@ func hello(s string, lang string) string {
 	if s == "" {
 		s = "world"
 	}
-	if lang == "spanish" {
-		return "hola, " + s
+
+	pre := hellopre
+
+	switch lang {
+	case "spanish":
+		pre = "hola, "
+	case "franch":
+		pre = "oui, "
 	}
-	if lang == "franch" {
-		return "oui, " + s
-	}
-	return hellopre + s
+
+	return pre + s
 }
