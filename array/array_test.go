@@ -1,18 +1,27 @@
 package array
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func TestSum(t *testing.T) {
-	var nums = [5]int{1, 2, 3, 4, 5}
+	var nums = []int{1, 2, 3, 4, 5}
 
 	got := Sum(nums)
 	wants := 15
-	assert(t, got, wants, nums)
+	assert(t, got, wants)
+}
+func TestSumAll(t *testing.T) {
+	g := SumAll([]int{1, 2}, []int{0, 9})
+	w := []int{3, 9}
+
+	assert(t, g, w)
 }
 
-func assert(t testing.TB, got, want, nums any) {
+func assert(t testing.TB, got, want any) {
 	t.Helper()
-	if got != want {
-		t.Errorf("got %d wants %d, %v", got, want, nums)
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("got %q wants %q", got, want)
 	}
 }
