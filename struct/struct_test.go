@@ -19,7 +19,7 @@ func TestPerimeter(t *testing.T) {
 			R: 10,
 		}
 		g := circle.Perimeter()
-		w := 40.0
+		w := 62.83185307179586
 		if g != w {
 			t.Errorf("error")
 		}
@@ -42,7 +42,7 @@ func TestArea(t *testing.T) {
 			R: 10.0,
 		}
 		g := circle.Area()
-		w := 72.0
+		w := 314.1592653589793
 		if g != w {
 			t.Errorf("error")
 		}
