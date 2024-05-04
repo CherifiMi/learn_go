@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
+	"main/err"
 )
 
 func main() {
-	fmt.Println("hello mito")
+	fmt.Println("", err.Bitcoin(10))
 }
