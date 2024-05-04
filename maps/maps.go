@@ -1,5 +1,7 @@
 package maps
 
-func Search(dic map[string]string, s string) string {
-	return dic[s]
+type Dic map[string]string
+
+func (d Dic) Search(s string) string {
+	return d[s]
 }
