@@ -1,13 +1,14 @@
 package err
 
 type Wallet struct {
-	balance int
+	balance Bitcoin
 }
+type Bitcoin int
 
-func (w *Wallet) Deposit(i int) {
+func (w *Wallet) Deposit(i Bitcoin) {
 	w.balance += i
 }
 
-func (w *Wallet) Balance() int {
+func (w *Wallet) Balance() Bitcoin {
 	return w.balance
 }
