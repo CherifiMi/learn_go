@@ -33,7 +33,6 @@ func TestArea(t *testing.T) {
 		if got != want {
 			t.Errorf("%f %f", got, want)
 		}
-
 	}
 
 	t.Run("test rect", func(t *testing.T) {
@@ -46,4 +45,21 @@ func TestArea(t *testing.T) {
 		}
 		checkArea(t, circle, 314.1592653589793)
 	})
+}
+
+func TestAreaTable(t *testing.T) {
+	earaTests := []struct {
+		shape Shape
+		want  float64
+	}{
+		{Rect{12, 6}, 72.0},
+		{Circle{10}, 314.1592653589793},
+	}
+
+	for _, tt := range earaTests {
+		got := tt.shape.Area()
+		if got != tt.want {
+			t.Errorf("%f %f", got, tt.want)
+		}
+	}
 }
