@@ -1,6 +1,9 @@
 package err
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type Wallet struct {
 	balance Bitcoin
@@ -19,6 +22,10 @@ func (w *Wallet) Balance() Bitcoin {
 	return w.balance
 }
 
-func (w *Wallet) Withdraw(bitcoin Bitcoin) {
+func (w *Wallet) Withdraw(bitcoin Bitcoin) error {
+	if w.balance < bitcoin {
+		return errors.New("oh no")
+	}
 	w.balance -= bitcoin
+	return nil
 }
