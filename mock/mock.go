@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func CountDown(out io.Writer, sleeper Sleeper) {
+func CountDown(out io.Writer) {
 	for i := 3; i > 0; i-- {
 		fmt.Fprintln(out, i)
 		time.Sleep(1 * time.Second)
