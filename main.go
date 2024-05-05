@@ -1,10 +1,15 @@
 package main
 
 import (
-	"fmt"
-	"main/err"
+	"log"
+	"main/di"
+	"net/http"
 )
 
+func MyGreeterHandler(w http.ResponseWriter, r *http.Request) {
+	di.Greet(w, "mito")
+}
+
 func main() {
-	fmt.Println("", err.Bitcoin(10))
+	log.Fatal(http.ListenAndServe(":5001", http.HandlerFunc(MyGreeterHandler)))
 }

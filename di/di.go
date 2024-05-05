@@ -1,7 +1,10 @@
 package di
 
-import "fmt"
+import (
+	"fmt"
+	"io"
+)
 
-func Greet(name string) {
-	fmt.Printf("hello, %s", name)
+func Greet(w io.Writer, name string) {
+	fmt.Fprintf(w, "hello, %s", name)
 }
