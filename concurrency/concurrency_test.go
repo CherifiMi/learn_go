@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// helper
 func mockWebsiteChecker(url string) bool {
 	if url == "waat://furhurterwe.geds" {
 		return false
@@ -13,6 +14,12 @@ func mockWebsiteChecker(url string) bool {
 	return true
 }
 
+func slowWebCheker(_ string) bool {
+	time.Sleep(20 * time.Millisecond)
+	return true
+}
+
+// test
 func TestCheckWebsites(t *testing.T) {
 	websites := []string{
 		"http://google.com",
@@ -32,10 +39,8 @@ func TestCheckWebsites(t *testing.T) {
 		t.Fatalf("wanted %v, got %v", want, got)
 	}
 }
-func slowWebCheker(_ string) bool {
-	time.Sleep(20 * time.Millisecond)
-	return true
-}
+
+// bench mark
 func BenchmarkCheckWeb(b *testing.B) {
 	urls := make([]string, 100)
 	for i := 0; i < len(urls); i++ {

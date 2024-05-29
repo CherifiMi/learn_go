@@ -1,23 +1,23 @@
 package main
 
-type WebCheker func(string) bool
+type WebChecker func(string) bool
 type result struct {
 	string
 	bool
 }
 
-func CheckWeb(wc WebCheker, urls []string) map[string]bool {
+func CheckWeb(wc WebChecker, urls []string) map[string]bool {
 	results := make(map[string]bool)
-	resultChanel := make(chan result)
+	resultChanal := make(chan result)
 
 	for _, url := range urls {
 		go func(u string) {
-			resultChanel <- result{u, wc(u)}
+			resultChanal <- result{u, wc(u)}
 		}(url)
 	}
 
 	for i := 0; i < len(urls); i++ {
-		r := <-resultChanel
+		r := <-resultChanal
 		results[r.string] = r.bool
 	}
 
