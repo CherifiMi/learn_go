@@ -1,6 +1,7 @@
 package context
 
 import (
+	"context"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -24,7 +25,7 @@ func (s *SpyStore) Fetch() string {
 func TestServer(t *testing.T) {
 	t.Run("normal", func(t *testing.T) {
 		data := "hello mito"
-		svr := Server(&SpyStore{data, false})
+		svr := Server(&SpyStore{response: data})
 
 		req := httptest.NewRequest(http.MethodGet, "/", nil)
 		res := httptest.NewRecorder()
@@ -37,6 +38,23 @@ func TestServer(t *testing.T) {
 	})
 
 	t.Run("tells store to cancel work if request is cancelled", func(t *testing.T) {
+		data := "hello mito"
+		store := &SpyStore{response: data}
+		svr := Server(store)
+
+		req := httptest.NewRequest(http.MethodGet, "/", nil)
+
+		cancellingCtx, cancel := context.WithCancel(req.Context())
+		time.AfterFunc(5*time.Millisecond, cancel)
+		req = req.WithContext(cancellingCtx)
+
+		res := httptest.NewRecorder()
+
+		svr.ServeHTTP(res, req)
+
+		if !store.cancelled {
+			t.Error("store was not told to cancel")
+		}
 
 	})
 }
