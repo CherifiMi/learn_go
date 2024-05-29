@@ -13,15 +13,26 @@ type Profile struct {
 }
 
 func walk(x interface{}, fn func(string)) {
-	val := reflect.ValueOf(x)
-	for i := 0; i < val.NumField(); i++ {
-		s := val.Field(i)
-
-		switch s.Kind() {
-		case reflect.String:
-			fn(s.String())
-		case reflect.Struct:
-			walk(s.Interface(), fn)
+	val := getVlue(x)
+	switch val.Kind() {
+	case reflect.Struct:
+		for i := 0; i < val.NumField(); i++ {
+			walk(val.Field(i).Interface(), fn)
 		}
+	case reflect.Slice:
+		for i := 0; i < val.Len(); i++ {
+			walk(val.Index(i).Interface(), fn)
+		}
+	case reflect.String:
+		fn(val.String())
 	}
+
+}
+
+func getVlue(x interface{}) reflect.Value {
+	val := reflect.ValueOf(x)
+	if val.Kind() == reflect.Pointer {
+		val = val.Elem()
+	}
+	return val
 }
