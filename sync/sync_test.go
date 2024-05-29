@@ -19,6 +19,9 @@ func (c *Counter) Inc() {
 func (c *Counter) Value() int {
 	return c.val
 }
+func NewCounter() *Counter {
+	return &Counter{}
+}
 
 func TestCounter(t *testing.T) {
 	t.Run("increment 3 times", func(t *testing.T) {
@@ -36,7 +39,7 @@ func TestCounter(t *testing.T) {
 
 	t.Run("rusn safly concornelty", func(t *testing.T) {
 		wantedCount := 1000
-		counter := Counter{}
+		counter := NewCounter()
 
 		var wg sync.WaitGroup
 		wg.Add(wantedCount)
