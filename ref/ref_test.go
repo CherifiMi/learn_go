@@ -13,7 +13,7 @@ func TestWalk(t *testing.T) {
 		ExpectedCall []string
 	}{
 		{
-			"",
+			"string",
 			struct {
 				Name string
 			}{"cheris"},
@@ -58,6 +58,22 @@ func TestWalk(t *testing.T) {
 				{34, "Reykjavík"},
 			},
 			[]string{"London", "Reykjavík"},
+		},
+		{
+			"arrays",
+			[2]Profile{
+				{33, "London"},
+				{34, "Reykjavík"},
+			},
+			[]string{"London", "Reykjavík"},
+		},
+		{
+			"maps",
+			map[string]string{
+				"Cow":   "Moo",
+				"Sheep": "Baa",
+			},
+			[]string{"Moo", "Baa"},
 		},
 	}
 
